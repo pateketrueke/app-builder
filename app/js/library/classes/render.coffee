@@ -1,4 +1,4 @@
-class Render
+class App.Render
   initialize_module: ->
     @partial = (path, vars={}) ->
       path = path ? 'undefined'

@@ -1,4 +1,4 @@
-class Sample
+class App.Sample
 
   render_welcome = (params) ->
     @el.innerHTML += @partial 'sample', params
