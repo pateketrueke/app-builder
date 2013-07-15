@@ -4,10 +4,10 @@
   "launch_in_ci" : ["PhantomJS"],
   "before_tests": "lineman grunt blanket",
   "src_files" : [
-    "coverage/main.js",
     "generated/js/ci.js",
     "generated/js/views.js",
     "generated/js/vendor.js",
+    "coverage/main.js",
     "generated/js/spec/main.js"
   ]
 }
