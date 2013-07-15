@@ -1,0 +1,6 @@
+js:
+  - vendor/components/app-router-lineman/dist/app-router-lineman.js
+  - vendor/components/route-recognizer/dist/route-recognizer.js
+  - vendor/components/rsvp.js/browser/rsvp.js
+  - vendor/components/router.js/dist/router.js
+  - vendor/components/jade/runtime.js
