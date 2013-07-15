@@ -1,0 +1,8 @@
+*~
+.DS_Store
+
+/dist
+/coverage
+/generated
+/node_modules
+/vendor/components

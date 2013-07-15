@@ -1,0 +1,13 @@
+{
+  "dependencies": {
+    "app-router-lineman": "https://github.com/pateketrueke/app-router-lineman.git",
+    "route-recognizer": "https://github.com/tildeio/route-recognizer.git",
+    "rsvp.js": "https://github.com/tildeio/rsvp.js.git",
+    "router.js": "https://github.com/tildeio/router.js.git",
+    "jade": "~0.32.0"
+  },
+  "devDependencies": {
+    "jasmine.async": "~0.1.0",
+    "blanket": "~1.1.5"
+  }
+}

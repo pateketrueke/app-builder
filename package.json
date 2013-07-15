@@ -1,0 +1,23 @@
+{
+  "name": "app-builder",
+  "title": "Sample.app",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Application skeleton for Lineman",
+  "homepage": "https://github.com/pateketrueke/app-builder",
+  "author": {
+    "name": "Alvaro Cabrera",
+    "email": "pateketrueke@gmail.com"
+  },
+  "dependencies": {
+    "grunt": "~0.4.1",
+    "grunt-bower-task": "~0.2.3",
+    "grunt-contrib-jade": "~0.7.0",
+    "grunt-blanket": "0.0.8",
+    "lineman": "~0.11.6"
+  },
+  "engines": {
+    "node": "~>0.10.5",
+    "npm": "~>1.2.18"
+  }
+}
