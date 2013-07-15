@@ -1,5 +1,5 @@
 app = new App document.body ? document.createElement('div'), '/'
-app.load([Render, Sample]).run()
+app.load([App.Render, App.Sample]).run()
 
 describe 'Render', ->
 

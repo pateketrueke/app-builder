@@ -29,7 +29,7 @@
     <script type="text/javascript">
       (function (root) {
 
-        var modules = [Render, Sample],
+        var modules = [App.Render, App.Sample],
             body = document.body,
             path = document.location.pathname,
             init = function () {

@@ -1,3 +1,4 @@
 ul#sample
   each item in list
-    li!= partial('other', item)
+    li
+      span!= partial('other', item)
