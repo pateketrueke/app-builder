@@ -45,7 +45,7 @@ class Module
 Features
 --------
 
-- Powered by [router.js](https://github.com/tildeio/router.js), our framework for [route recognizing](https://github.com/tildeio/route-recognizer) an [RSVP](https://github.com/tildeio/rsvp.js).
+- Powered by [router.js](https://github.com/tildeio/router.js), the best framework for [route recognizing](https://github.com/tildeio/route-recognizer) and [RSVP](https://github.com/tildeio/rsvp.js).
 
 - Provides support for code coverage with [Blanket](http://alex-seville.github.io/blanket/) and adds [Jade](http://jade-lang.com/) and [Bower](https://github.com/bower/bower) as core dependencies.
 
