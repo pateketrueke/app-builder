@@ -3,7 +3,7 @@ describe 'Now lets fun!', ->
 
   async.it 'should works?', (done) ->
     sample = """
-             <ul id="sample"><li>John doe</li><li>Joe Merengues</li><li>Scrooge McDuck</li></ul>
+             <ul id="sample"><li><span>John doe</span></li><li><span>Joe Merengues</span></li><li><span>Scrooge McDuck</span></li></ul>
              """
 
     delay done, ->
