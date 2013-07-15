@@ -11,8 +11,8 @@ Do you remember MVC?
 Well, this is [MOVE](http://cirw.in/blog/time-to-move-on), the better.
 
 ```coffeescript
-app = new App null, '/'
-app.load Module
+app = new App document.body, '/'
+app.load App.Module
 app.run()
 ```
 
@@ -22,7 +22,7 @@ Modules
 Almost everything will occurs within modules looks as below:
 
 ```coffeescript
-class Module
+class App.Module
 
   render_template = (page) ->
     @el.innerHTML += "Page title: #{page.title}"
@@ -45,7 +45,7 @@ class Module
 Features
 --------
 
-- Powered by [router.js](https://github.com/tildeio/router.js), the best framework for [route recognizing](https://github.com/tildeio/route-recognizer) and [RSVP](https://github.com/tildeio/rsvp.js).
+- Based on [app-router-lineman](https://github.com/pateketrueke/app-router-lineman) which is powered by [router.js](https://github.com/tildeio/router.js), the best framework for [route recognizing](https://github.com/tildeio/route-recognizer) and [RSVP](https://github.com/tildeio/rsvp.js).
 
 - Provides support for code coverage with [Blanket](http://alex-seville.github.io/blanket/) and adds [Jade](http://jade-lang.com/) and [Bower](https://github.com/bower/bower) as core dependencies.
 
