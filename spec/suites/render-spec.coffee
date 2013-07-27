@@ -1,5 +1,5 @@
-app = new App document.body ? document.createElement('div'), '/'
-app.load([App.Render, App.Sample]).run()
+app = new App element, '/'
+app.load(App.modules()).run()
 
 describe 'Render', ->
 
@@ -10,8 +10,8 @@ describe 'Render', ->
 
   it 'will handle the title also', ->
     app.context.title 'Some'
-    app.context.title 'Testing', ' - '
-    expect(document.title).toEqual 'Testing - Lineman'
+    app.context.title 'Testing'
+    expect(document.title).toEqual 'Testing'
 
   it 'will bind our helpers', ->
     app.context.helpers.up = (bar) -> bar.toUpperCase()

@@ -2,8 +2,9 @@ var root = this || window;
 
 root.context = root.describe;
 root.xcontext = root.xdescribe;
-
 root._$blanket = root._$jscoverage;
+
+root.element = document.createElement('div');
 
 root.delay = function (resume, callback) {
   setTimeout(function () {

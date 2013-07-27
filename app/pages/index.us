@@ -29,20 +29,12 @@
     <script type="text/javascript">
       (function (root) {
 
-        var modules = [App.Render, App.Sample],
+        var app,
             body = document.body,
-            path = document.location.pathname,
-            init = function () {
-              root.app = new App(body, path);
-              root.app.name = '<%= pkg.title %>';
-              root.app.load(modules).run();
-            };
+            path = document.location.pathname;
 
-        if (root.addEventListener) {
-          root.addEventListener('DOMContentLoaded', init, false);
-        } else {
-          root.attachEvent('load', init);
-        }
+        app = new App(body, path);
+        app.load(App.modules()).run();
 
       })(window);
     </script>
