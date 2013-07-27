@@ -37,6 +37,14 @@ config = config.extend "files",
       dest: "generated/template/jade.js"
     concatenatedViews: "generated/js/views.js"
 
+  coffee:
+    app: ["app/js/**/*.coffee", "app/js/**/*.litcoffee"]
+    spec: ["spec/**/*.coffee", "spec/**/*.litcoffee"]
+    lit:
+      tpl: "app/litcoffee.jst"
+      src: ["app/js/**/*.litcoffee", "spec/**/*.litcoffee"]
+      dest: "doc/"
+
   css:
     files: ["vendor/css/**/*.css"]
     minifiedDist: "dist/css/<%= pkg.name %>.css"

@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "grunt": "~0.4.1",
+    "highlight.js": "~7.3.0",
+    "grunt-markdown": "~0.3.0",
     "grunt-bower-task": "~0.2.3",
     "grunt-contrib-jade": "~0.7.0",
     "grunt-blanket": "0.0.8",

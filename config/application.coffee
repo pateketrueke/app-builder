@@ -24,13 +24,14 @@ config = config.extend "application",
     #   port: 3000
 
   loadNpmTasks: [
+    "grunt-markdown"
     "grunt-bower-task"
     "grunt-contrib-jade"
     "grunt-blanket"
   ]
 
   prependTasks:
-    common: ["bower:install", "jade"]
+    common: ["bower", "jade"]
 
   removeTasks:
     common: ["handlebars", "jst"]
@@ -48,6 +49,9 @@ config = config.extend "application",
   clean:
     js:
       src: [
+        "<%= files.bower.dest %>"
+        "<%= files.blanket.dest %>"
+        "<%= files.coffee.lit.dest %>"
         "<%= files.coffee.generated %>"
         "<%= files.coffee.generatedSpec %>"
         "<%= files.template.concatenatedViews %>"
@@ -56,6 +60,19 @@ config = config.extend "application",
         "<%= files.js.concatenatedSpec %>"
         "<%= files.js.concatenatedVendor %>"
       ]
+
+  markdown:
+    docs:
+      files: [
+        { expand: on, flatten: on, src: "<%= files.coffee.lit.src %>", dest: "<%= files.coffee.lit.dest %>", ext: ".html" }
+      ]
+      options:
+        template: "<%= files.coffee.lit.tpl %>"
+        markdownOptions:
+          gfm: on
+          highlight: (code, lang) ->
+            hljs = require "highlight.js"
+            hljs.highlight(lang or "coffeescript", code).value
 
   coffee:
     options:
@@ -82,10 +99,14 @@ config = config.extend "application",
 
     jade:
       files: "<%= files.template.jade.src %>"
-      tasks: ["jade", "concat:js"]
+      tasks: ["jade", "concat:app"]
 
     lint:
       files: ["<%= files.js.app.files %>"]
+
+    css:
+      files: ["<%= files.css.vendor %>", "<%= files.css.files %>", "<%= files.css.app %>"]
+      tasks: ["concat:css"]
 
     js:
       files: ["<%= files.js.files %>", "<%= files.js.app.files %>"]
@@ -93,27 +114,39 @@ config = config.extend "application",
 
     ci:
       files: ["<%= files.js.ci.files %>"]
-      tasks: ["concat:ci"]
+      tasks: ["concat:js"]
 
   jshint:
     files: ["<%= files.js.app.files %>"]
 
   concat:
-    vendor:
-      src: ["<%= files.js.files %>"]
-      dest: "<%= files.js.concatenatedVendor %>"
-
-    app:
-      src: ["<%= files.js.app.files %>", "<%= files.coffee.generated %>"]
-      dest: "<%= files.js.concatenatedApp %>"
-
     js:
-      src: "<%= files.template.generated %>"
-      dest: "<%= files.template.concatenatedViews %>"
-
-    ci:
       src: "<%= files.js.ci.files %>"
       dest: "<%= files.js.concatenatedCI %>"
+
+    app:
+      options:
+        process: (src, filepath) ->
+          "!(function (/* #{filepath} */) {\n#{src}\n}).apply(window || this)"
+      files:
+        "<%= files.js.concatenatedApp %>": ["<%= files.js.app.files %>", "<%= files.coffee.generated %>"]
+        "<%= files.template.concatenatedViews %>": ["<%= files.template.generated %>"]
+
+    vendor:
+      options:
+        process: (src, filepath) ->
+          src.replace /["']use strict['"]\s*;?/g, ''
+      files:
+        "<%= files.js.concatenatedVendor %>": ["<%= files.js.files %>"]
+
+    css:
+      src: [
+        "<%= files.less.generatedVendor %>"
+        "<%= files.less.generatedApp %>"
+        "<%= files.css.files %>"
+        "<%= files.css.app %>"
+      ]
+      dest: "<%= files.css.concatenated %>"
 
   blanket:
     compile:
