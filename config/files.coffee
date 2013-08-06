@@ -38,12 +38,14 @@ config = config.extend "files",
     concatenatedViews: "generated/js/views.js"
 
   coffee:
-    app: ["app/js/**/*.coffee", "app/js/**/*.litcoffee"]
-    spec: ["spec/**/*.coffee", "spec/**/*.litcoffee"]
-    lit:
-      tpl: "app/litcoffee.jst"
-      src: ["app/js/**/*.litcoffee", "spec/**/*.litcoffee"]
-      dest: "doc/"
+    app: ["app/js/**/*.coffee", "app/js/**/*.litcoffee", "app/js/**/*.coffee.md"]
+    spec: ["spec/**/*.coffee", "spec/**/*.litcoffee", "spec/js/**/*.coffee.md"]
+    docs:
+      idx: "docs/index.us"
+      tpl: "docs/layout.us"
+      css: "docs/styles.css"
+      src: ["app/**/*.md", "app/**/*.litcoffee", "spec/**/*.litcoffee", "spec/**/*.coffee.md"]
+      dest: "docs/html/"
 
   css:
     files: ["vendor/css/**/*.css"]
