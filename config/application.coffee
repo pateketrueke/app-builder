@@ -30,12 +30,8 @@ config = config.extend "application",
     "grunt-blanket"
   ]
 
-  # lineman grunt markdown literate
-  # appendTasks:
-  #   common: ["markdown", "literate"]
-
   prependTasks:
-    common: ["bower", "jade"]
+    common: ["jade"]
 
   removeTasks:
     common: ["handlebars", "jst"]
@@ -95,11 +91,19 @@ config = config.extend "application",
     options:
       copy: off
       targetDir: "<%= files.bower.dest %>"
-    install: {}
+    update: {}
 
   watch:
+    literate:
+      files: "<%= files.coffee.docs.src %>"
+      tasks: ["markdown", "literate"]
+
     coffee:
       tasks: ["coffee", "concat:app"]
+
+    bower:
+      files: "<%= files.bower.file %>"
+      tasks: ["bower"]
 
     jade:
       files: "<%= files.template.jade.src %>"

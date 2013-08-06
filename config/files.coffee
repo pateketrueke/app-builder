@@ -26,6 +26,7 @@ config = config.extend "files",
 
   bower:
     dest: "vendor/components"
+    file: "bower.json"
 
   blanket:
     dest: "coverage/"
@@ -72,7 +73,7 @@ config = config.extend "files",
 
 # vendors
 grunt = require "grunt"
-vendor = grunt.file.readYAML "#{__dirname}/../app/vendor.yaml"
+vendor = grunt.file.readYAML "#{__dirname}/vendor.yaml"
 
 for kind in ['js', 'css']
   if vendor[kind] and config[kind]
