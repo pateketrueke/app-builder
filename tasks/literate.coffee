@@ -89,7 +89,7 @@ module.exports = (grunt) ->
       dots = "./#{dots.join '../'}"
 
       grunt.file.write src, _.template layout,
-        title: "#{pkg.title} - #{doc.title}"
+        title: "#{pkg.title} ##{doc.title}"
         style: "#{dots}style.css"
         tree: list(tree, dots, doc.path)
         body: grunt.file.read src
