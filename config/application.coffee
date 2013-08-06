@@ -30,6 +30,10 @@ config = config.extend "application",
     "grunt-blanket"
   ]
 
+  # lineman grunt markdown literate
+  # appendTasks:
+  #   common: ["markdown", "literate"]
+
   prependTasks:
     common: ["bower", "jade"]
 
@@ -51,7 +55,7 @@ config = config.extend "application",
       src: [
         "<%= files.bower.dest %>"
         "<%= files.blanket.dest %>"
-        "<%= files.coffee.lit.dest %>"
+        "<%= files.coffee.docs.dest %>"
         "<%= files.coffee.generated %>"
         "<%= files.coffee.generatedSpec %>"
         "<%= files.template.concatenatedViews %>"
@@ -64,10 +68,10 @@ config = config.extend "application",
   markdown:
     docs:
       files: [
-        { expand: on, flatten: on, src: "<%= files.coffee.lit.src %>", dest: "<%= files.coffee.lit.dest %>", ext: ".html" }
+        { expand: on, src: "<%= files.coffee.docs.src %>", dest: "<%= files.coffee.docs.dest %>", ext: ".html" }
       ]
       options:
-        template: "<%= files.coffee.lit.tpl %>"
+        template: "<%= files.coffee.docs.tpl %>"
         markdownOptions:
           gfm: on
           highlight: (code, lang) ->
