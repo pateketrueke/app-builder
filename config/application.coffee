@@ -27,6 +27,7 @@ config = config.extend "application",
     "grunt-markdown"
     "grunt-bower-task"
     "grunt-contrib-jade"
+    "grunt-contrib-compress"
     "grunt-blanket"
   ]
 
@@ -59,6 +60,15 @@ config = config.extend "application",
         "<%= files.js.concatenatedApp %>"
         "<%= files.js.concatenatedSpec %>"
         "<%= files.js.concatenatedVendor %>"
+      ]
+
+  compress:
+    main:
+      options:
+        archive: "<%= pkg.name %>.zip"
+
+      files: [
+        { src: ["dist/**"] }
       ]
 
   markdown:

@@ -20,8 +20,8 @@ config = config.extend "files",
       js: ["/js/views.js", "/js/vendor.js", "/js/app/main.js"]
       css: "/css/app.css"
     dist:
-      js: "/js/<%= pkg.name %>.js"
-      css: "/css/<%= pkg.name %>.css"
+      js: "./js/<%= pkg.name %>.js"
+      css: "./css/<%= pkg.name %>.css"
 
 
   bower:
