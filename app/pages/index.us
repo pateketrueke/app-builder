@@ -29,11 +29,7 @@
     <script type="text/javascript">
       (function (root) {
 
-        var app,
-            body = document.body,
-            path = document.location.pathname;
-
-        app = new App(body, path);
+        var app = new App(document.body, '/');
         app.load(App.modules()).run();
 
       })(window);
