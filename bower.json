@@ -1,6 +1,7 @@
 {
   "name": "app-builder",
   "dependencies": {
+    "app-router-lineman": "https://github.com/pateketrueke/app-router-lineman.git#0.2.0",
     "route-recognizer": "https://github.com/tildeio/route-recognizer.git",
     "rsvp.js": "https://github.com/tildeio/rsvp.js.git#2.0.0",
     "router.js": "https://github.com/tildeio/router.js.git",
