@@ -1,7 +1,11 @@
 
     class App.Sample
 
-      render_welcome = (params) ->
+      constructor: (app) ->
+        { @el, @title, @partial } = app.context
+
+      render_welcome: (params) ->
+        @title 'Welcome!', ' - '
         @el.innerHTML += @partial 'sample', params
 
       initialize_module: (mapper) ->
@@ -15,5 +19,4 @@
               { name: 'Scrooge McDuck' }
             ]
 
-            @title 'Welcome!', ' - '
-            @send render_welcome, list: data
+            @render_welcome list: data
