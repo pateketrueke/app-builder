@@ -2,9 +2,9 @@
     class App.Sample
 
       constructor: (app) ->
-        { @el, @html, @title, @partial } = app.context
+        { @send } = app.context
 
-      render_welcome: (params) ->
+      render_welcome = (params) ->
         @title 'Welcome!', ' - '
         @el.innerHTML += @partial 'sample'
 
@@ -22,4 +22,4 @@
               { name: 'Scrooge McDuck' }
             ]
 
-            @render_welcome list: data
+            @send render_welcome, list: data

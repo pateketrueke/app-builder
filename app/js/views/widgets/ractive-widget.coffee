@@ -10,6 +10,7 @@ class App.ractiveWidget
     view = new Ractive
       el: '#sample-out'
       template: @partial 'ractive'
+      sanitize: on
       data:
         users: params.list
         selected: current_user
