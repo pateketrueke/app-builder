@@ -32,7 +32,7 @@ config = config.extend "application",
   ]
 
   prependTasks:
-    common: ["jade"]
+    common: ["bower:install", "jade"]
 
   removeTasks:
     common: ["handlebars", "jst"]
@@ -102,6 +102,7 @@ config = config.extend "application",
       copy: off
       targetDir: "<%= files.bower.dest %>"
     update: {}
+    install: {}
 
   watch:
     literate:
@@ -113,7 +114,7 @@ config = config.extend "application",
 
     bower:
       files: "<%= files.bower.file %>"
-      tasks: ["bower"]
+      tasks: ["bower:update"]
 
     jade:
       files: "<%= files.template.jade.src %>"
