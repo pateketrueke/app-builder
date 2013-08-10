@@ -9,8 +9,8 @@
 
         @helpers.title = (subtitle, sep=' | ') =>
           out = []
-          out.push(title) if title
-          out.push(subtitle) if subtitle
+          out.push title if title
+          out.push subtitle if subtitle
           @title out.join sep
 
         @partial = (path, vars={}) =>
@@ -26,16 +26,16 @@
 
         @title = (name, sep=' | ') =>
           replace = []
-          replace.push(name) if name
+          replace.push name if name
           document.title = replace.join sep
           title = document.title unless title
 
-        @html = (selector) =>
-          return cached[selector] if cached[selector]
-          cached[selector] = $(selector, @el)
+        @html = (id) =>
+          return cached[id] if cached[id]
+          cached[id] = document.getElementById id
 
         @to = (hash) =>
-          clearTimeout(ticker) if ticker
+          clearTimeout ticker if ticker
           ticker = setTimeout ->
             document.location.hash = hash.replace '#', ''
           , 13
