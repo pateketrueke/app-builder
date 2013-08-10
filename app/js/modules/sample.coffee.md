@@ -2,11 +2,14 @@
     class App.Sample
 
       constructor: (app) ->
-        { @el, @title, @partial } = app.context
+        { @el, @html, @title, @partial } = app.context
 
       render_welcome: (params) ->
         @title 'Welcome!', ' - '
-        @el.innerHTML += @partial 'sample', params
+        @el.innerHTML += @partial 'sample'
+
+        widget = new App.ractiveWidget @
+        widget = widget.render params
 
       initialize_module: (mapper) ->
         mapper.draw (match) ->

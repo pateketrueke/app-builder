@@ -1,0 +1,21 @@
+{{#users.length}}
+
+h2 Hi {{current_user.name}}!
+
+ul#sample
+  {{#users:i}}
+  {{>user}}
+  {{/users}}
+
+{{/users.length}}
+
+<!-- {{>user}} -->
+li
+  label
+    input(type='radio',
+          name='sample-user',
+          value='{{i}}',
+          checked='{{ selected === i }}',
+          proxy-click-change='set_user')
+    != partial('other')
+<!-- {{/user}} -->
