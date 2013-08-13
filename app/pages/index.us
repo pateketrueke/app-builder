@@ -1,24 +1,15 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>     <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="es" xmlns:fb="http://ogp.me/ns/fb#"><![endif]-->
-<!--[if IE 7]>        <html class="no-js lt-ie9 lt-ie8" lang="es" xmlns:fb="http://ogp.me/ns/fb#"><![endif]-->
-<!--[if IE 8]>        <html class="no-js lt-ie9" lang="es" xmlns:fb="http://ogp.me/ns/fb#"><![endif]-->
-<!--[if gt IE 8]><!--><html class="no-js modernbrowser" lang="es" xmlns:fb="http://ogp.me/ns/fb#"><!--<![endif]-->
+<html lang="en">
   <head>
+
     <meta charset="UTF-8" />
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+
     <title><%= pkg.name %></title>
+
     <meta name="viewport" content="initial-scale=1.0, maximum-scale=2.0, user-scalable=no" />
-
-  <!--
-    <meta name="google-site-verification" content="">
-    <meta property="og:description" content="">
-    <meta property="og:site_name" content="">
-    <meta property="og:title" content="">
-    <meta property="og:image" content="">
-    <meta property="og:url" content="">
-  -->
-
     <link rel="stylesheet" type="text/css" href="<%= css %>" media="all" />
+
   </head>
   <body>
 
@@ -27,31 +18,14 @@
     <% }); %>
 
     <script type="text/javascript">
-      (function (root) {
+      (function () {
+        var a = App,
+            b = document,
+            c = new a(b, b.location.pathname);
 
-        var app = new App(document.body, '/');
-        app.load(App.modules()).run();
-
-      })(window);
+        c.load(a.modules()).run();
+      })();
     </script>
-
-<!--
-  <script>
-    window._gaq = [['_setAccount',''],['_trackPageview'],['_trackPageLoadTime']];
-    Modernizr.load({
-      load: [
-          ('https:' == location.protocol ? '//ssl' : '//www') + '.google-analytics.com/ga.js',
-          '//connect.facebook.net/es_LA/all.js#xfbml=1&appId=',
-          '//platform.twitter.com/widgets.js'
-        ]
-    });
-  </script>
--->
-
-  <!--[if lt IE 7 ]>
-    <script defer src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
-    <script defer>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
-  <![endif]-->
 
   </body>
 </html>
