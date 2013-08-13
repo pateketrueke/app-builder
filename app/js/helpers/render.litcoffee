@@ -29,13 +29,3 @@
           replace.push name if name
           document.title = replace.join sep
           title = document.title unless title
-
-        @html = (id) =>
-          return cached[id] if cached[id]
-          cached[id] = document.getElementById id
-
-        @to = (hash) =>
-          clearTimeout ticker if ticker
-          ticker = setTimeout ->
-            document.location.hash = hash.replace '#', ''
-          , 13
