@@ -4,7 +4,7 @@ app.load(App.modules()).run()
 describe 'Render', ->
 
   it 'will handle correctly all partials', ->
-    other = app.context.partial 'other', name: 'John Doe'
+    other = app.context.partial 'partial', name: 'John Doe'
     expect(other).toEqual 'John Doe'
     expect(app.context.partial).toThrow()
 

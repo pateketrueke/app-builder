@@ -1,25 +1,33 @@
 
     class App.Sample
 
-      constructor: (app) ->
-        { @send } = app.context
+      widget = {}
 
-      render_welcome = (params) ->
+      hello_world: ->
+        # do nothing
+
+      show_user: (params) ->
+        widget.set_user params.id
+
+      draw_view = ->
         @title 'Welcome!', ' - '
-        @el.innerHTML += @partial 'sample'
+        @find('body').innerHTML += @partial 'sample'
 
         widget = new App.ractiveWidget @
-        widget = widget.render params
+        widget.render list: [
+          { name: 'John doe' }
+          { name: 'Joe Merengues' }
+          { name: 'Scrooge McDuck' }
+        ]
+
+        widget.view.on 'set_user', (e) =>
+          @go 'show_user', id: e.node.value
 
       initialize_module: (mapper) ->
         mapper.draw (match) ->
           match('/').to 'hello_world'
+          match('/user/:id').to 'show_user'
 
-          hello_world: =>
-            data = [
-              { name: 'John doe' }
-              { name: 'Joe Merengues' }
-              { name: 'Scrooge McDuck' }
-            ]
+          { @hello_world, @show_user }
 
-            @send render_welcome, list: data
+        @send draw_view
