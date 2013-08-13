@@ -39,8 +39,8 @@ config = config.extend "files",
     concatenatedViews: "generated/js/views.js"
 
   coffee:
-    app: ["app/js/**/*.coffee", "app/js/**/*.litcoffee", "app/js/**/*.coffee.md"]
-    spec: ["spec/**/*.coffee", "spec/**/*.litcoffee", "spec/js/**/*.coffee.md"]
+    app: ["app/js/**/*.litcoffee", "app/js/**/*.coffee.md", "app/js/**/*.coffee"]
+    spec: ["spec/**/*.litcoffee", "spec/js/**/*.coffee.md", "spec/**/*.coffee"]
     docs:
       idx: "docs/index.us"
       tpl: "docs/layout.us"
