@@ -1,4 +1,4 @@
-app = new App element, '/'
+app = new App '/'
 app.load(App.modules()).run()
 
 describe 'Render', ->
