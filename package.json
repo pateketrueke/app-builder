@@ -17,7 +17,7 @@
     "grunt-contrib-jade": "~0.7.0",
     "grunt-contrib-compress": "~0.5.2",
     "grunt-blanket": "0.0.8",
-    "lineman": "~0.11.6"
+    "lineman": "~0.12.1"
   },
   "engines": {
     "node": "~>0.10.5",
