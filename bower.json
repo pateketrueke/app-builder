@@ -2,6 +2,7 @@
   "name": "app-builder",
   "dependencies": {
     "jade": "~0.32.0",
+    "jquery": "~1.10.2",
     "ractive": "latest",
     "mohawk": "https://github.com/pateketrueke/mohawk.git#0.4.0"
   },
