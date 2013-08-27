@@ -8,6 +8,7 @@
 
       show_user: (params) ->
         widget.set_user params.id
+        @subtitle widget.current_user().name
 
       draw_view = ->
         @title 'Welcome!', ' - '

@@ -5,11 +5,11 @@
 
       initialize_module: ->
 
-        @helpers.title = (subtitle, sep=' | ') =>
+        @subtitle = @helpers.title = (subtitle, sep=' | ') =>
           out = []
           out.push default_title if default_title
           out.push subtitle if subtitle
-          @title out.join sep
+          document.title = out.join sep
 
         @partial = (path, vars={}) =>
           path = path ? 'undefined'
@@ -25,4 +25,4 @@
         @title = (name, sep=' | ') =>
           replace = []
           replace.push name if name
-          document.title = replace.join sep
+          default_title = document.title = replace.join sep

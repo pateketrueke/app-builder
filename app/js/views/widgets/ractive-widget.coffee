@@ -15,6 +15,9 @@ class App.ractiveWidget
       set_user: (e) =>
         @set_user e.node.value
 
+  current_user: ->
+    users[current_user]
+
   set_user: (id) ->
     current_user = parseInt id, 10
     @view.set
