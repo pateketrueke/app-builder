@@ -1,15 +1,13 @@
 
     class App.Render
 
-      cached = {}
-      ticker = null
-      title = document.title
+      default_title = document.title
 
       initialize_module: ->
 
         @helpers.title = (subtitle, sep=' | ') =>
           out = []
-          out.push title if title
+          out.push default_title if default_title
           out.push subtitle if subtitle
           @title out.join sep
 
@@ -28,4 +26,3 @@
           replace = []
           replace.push name if name
           document.title = replace.join sep
-          title = document.title unless title

@@ -20,8 +20,7 @@
     <script type="text/javascript">
       (function () {
         var a = App,
-            b = document,
-            c = new a(b, b.location.pathname);
+            c = new a();
 
         c.load(a.modules()).run();
       })();
