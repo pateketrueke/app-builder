@@ -11,7 +11,8 @@
 
       draw_view = ->
         @title 'Welcome!', ' - '
-        @find('body').innerHTML += @partial 'sample'
+
+        $('body').append @partial 'sample'
 
         widget = new App.ractiveWidget @
         widget.render list: [
