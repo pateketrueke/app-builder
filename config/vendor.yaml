@@ -1,5 +1,5 @@
 js:
-  - vendor/components/jade/runtime.js
-  - vendor/components/jquery/jquery.js
-  - vendor/components/ractive/Ractive.js
-  - vendor/components/mohawk/dist/Mohawk.js
+  - jade/runtime.js
+  - jquery/jquery.js
+  - ractive/Ractive.js
+  - mohawk/dist/Mohawk.js

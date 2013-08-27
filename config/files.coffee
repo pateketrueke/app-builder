@@ -77,7 +77,7 @@ vendor = grunt.file.readYAML "#{__dirname}/vendor.yaml"
 
 for kind in ['js', 'css']
   if vendor[kind] and config[kind]
-    config[kind].files.unshift(file) for file in vendor[kind].reverse()
+    config[kind].files.unshift("vendor/components/#{file}") for file in vendor[kind].reverse()
 
 
 module.exports = config
