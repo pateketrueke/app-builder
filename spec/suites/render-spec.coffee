@@ -1,6 +1,8 @@
 app = new App '/'
 app.load(App.modules()).run()
 
+$('#sample-out').hide()
+
 describe 'Render', ->
 
   it 'will handle correctly all partials', ->
