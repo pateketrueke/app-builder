@@ -26,7 +26,6 @@ config = config.extend "files",
 
   bower:
     dest: "vendor/components"
-    file: "bower.json"
 
   blanket:
     dest: "coverage/"

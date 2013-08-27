@@ -25,14 +25,13 @@ config = config.extend "application",
 
   loadNpmTasks: [
     "grunt-markdown"
-    "grunt-bower-task"
     "grunt-contrib-jade"
     "grunt-contrib-compress"
     "grunt-blanket"
   ]
 
   prependTasks:
-    common: ["bower:install", "jade"]
+    common: ["jade"]
 
   removeTasks:
     common: ["handlebars", "jst"]
@@ -97,13 +96,6 @@ config = config.extend "application",
       files:
         "<%= files.template.jade.dest %>": "<%= files.template.jade.src %>"
 
-  bower:
-    options:
-      copy: off
-      targetDir: "<%= files.bower.dest %>"
-    update: {}
-    install: {}
-
   watch:
     literate:
       files: "<%= files.coffee.docs.src %>"
@@ -111,10 +103,6 @@ config = config.extend "application",
 
     coffee:
       tasks: ["coffee", "concat:app"]
-
-    bower:
-      files: "<%= files.bower.file %>"
-      tasks: ["bower:update"]
 
     jade:
       files: "<%= files.template.jade.src %>"
