@@ -25,16 +25,19 @@ config = config.extend "application",
 
   loadNpmTasks: [
     "grunt-markdown"
+    "grunt-bower-task"
     "grunt-contrib-jade"
-    "grunt-contrib-compress"
     "grunt-blanket"
   ]
 
   prependTasks:
-    common: ["jade"]
+    common: ["bower", "jade"]
 
   removeTasks:
     common: ["handlebars", "jst"]
+
+  appendTasks:
+    dist: []
 
   pages:
     dev:
@@ -46,9 +49,17 @@ config = config.extend "application",
         js: ["<%= files.app.dist.js %>"]
         css: ["<%= files.app.dist.css %>"]
 
+  bower:
+    install:
+      options:
+        targetDir: "<%= files.bower.dest %>"
+        install: true
+        copy: false
+
   clean:
     js:
       src: [
+        "dist"
         "<%= files.bower.dest %>"
         "<%= files.blanket.dest %>"
         "<%= files.coffee.docs.dest %>"
@@ -59,15 +70,6 @@ config = config.extend "application",
         "<%= files.js.concatenatedApp %>"
         "<%= files.js.concatenatedSpec %>"
         "<%= files.js.concatenatedVendor %>"
-      ]
-
-  compress:
-    main:
-      options:
-        archive: "<%= pkg.name %>.zip"
-
-      files: [
-        { src: ["dist/**"] }
       ]
 
   markdown:
@@ -98,7 +100,11 @@ config = config.extend "application",
 
   watch:
     literate:
-      files: "<%= files.coffee.docs.src %>"
+      files: [
+        "<%= files.coffee.docs.src %>"
+        "<%= files.coffee.docs.css %>"
+        "<%= files.coffee.docs.main %>"
+      ]
       tasks: ["markdown", "literate"]
 
     coffee:
@@ -134,13 +140,14 @@ config = config.extend "application",
     app:
       options:
         process: (src, filepath) ->
-          "!(function (/* #{filepath} */) {\n#{src}\n}).apply(window || this)"
+          "!(function (/* #{filepath} */) {\n#{src}\n}).call(this)"
       files:
         "<%= files.js.concatenatedApp %>": ["<%= files.js.app.files %>", "<%= files.coffee.generated %>"]
         "<%= files.template.concatenatedViews %>": ["<%= files.template.generated %>"]
 
     vendor:
       options:
+        separator: ';'
         process: (src, filepath) ->
           src.replace /["']use strict['"]\s*;?/g, ''
       files:

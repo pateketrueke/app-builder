@@ -16,13 +16,8 @@ config = config.extend "files",
   #Override file patterns here
 
   app:
-    dev:
-      js: ["/js/views.js", "/js/vendor.js", "/js/app/main.js"]
-      css: "/css/app.css"
-    dist:
-      js: "./js/<%= pkg.name %>.js"
-      css: "./css/<%= pkg.name %>.css"
-
+    dev: {}
+    dist: {}
 
   bower:
     dest: "vendor/components"
@@ -41,11 +36,12 @@ config = config.extend "files",
     app: ["app/js/**/*.litcoffee", "app/js/**/*.coffee.md", "app/js/**/*.coffee"]
     spec: ["spec/**/*.litcoffee", "spec/js/**/*.coffee.md", "spec/**/*.coffee"]
     docs:
-      idx: "docs/index.us"
-      tpl: "docs/layout.us"
-      css: "docs/styles.css"
+      idx: "app/docs/index.us"
+      tpl: "app/docs/layout.us"
+      css: "app/docs/styles.css"
+      main: "app/docs/welcome.us"
       src: ["app/**/*.md", "app/**/*.litcoffee", "spec/**/*.litcoffee", "spec/**/*.coffee.md"]
-      dest: "docs/html/"
+      dest: "htmldocs/"
 
   css:
     files: ["vendor/css/**/*.css"]
@@ -72,11 +68,16 @@ config = config.extend "files",
 
 # vendors
 grunt = require "grunt"
-vendor = grunt.file.readYAML "#{__dirname}/vendor.yaml"
+vendor = grunt.file.readYAML "#{__dirname}/../app/vendor.yaml"
 
 for kind in ['js', 'css']
   if vendor[kind] and config[kind]
     config[kind].files.unshift("vendor/components/#{file}") for file in vendor[kind].reverse()
 
+# settings
+options = grunt.file.readYAML "#{__dirname}/../app/config.yaml"
+
+config.app.dist = options.dist or {}
+config.app.dev = options.dev or config.app.dist or {}
 
 module.exports = config

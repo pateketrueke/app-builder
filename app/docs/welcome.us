@@ -1,0 +1,19 @@
+<h2>Package details</h2>
+<ul>
+  <li><%= pkg.name %> v<%= pkg.version %></li>
+  <li><%= pkg.description %></li>
+  <li><%= pkg.homepage %></li>
+</ul>
+
+<h3>Install this</h3>
+<pre><code>$ git clone https://github.com/pateketrueke/lineman-mohawk-template
+$ cd lineman-mohawk-template
+$ rm -rf .git
+$ git init
+  ...
+
+$ npm install
+  ...
+
+$ lineman run
+  ...</code></pre>

@@ -1,5 +1,0 @@
-js:
-  - jade/runtime.js
-  - jquery/jquery.js
-  - ractive/Ractive.js
-  - mohawk/dist/Mohawk.js
