@@ -1,0 +1,10 @@
+p
+  if user
+    button.js-action(data-action='after_choose')
+      | Show selected
+  else
+    button.js-action(data-action='before_choose')
+      | Continue (no selection)
+
+a.js-action(data-action='redirect', href=url_for('show_user', { id: user ? user.id : 0 }))
+  | Show users

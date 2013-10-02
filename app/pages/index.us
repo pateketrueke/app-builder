@@ -13,16 +13,20 @@
   </head>
   <body>
 
+    <div id="wrapper"></div>
+
     <% _(js).each(function (file) { %>
       <script type="text/javascript" src="<%= file %>"></script>
     <% }); %>
 
     <script type="text/javascript">
-      (function () {
-        var a = App,
-            c = new a();
-
-        c.load(a.modules()).run();
+      !(function () {
+        Thinner.loader({ el: '#wrapper' }).run(function (app) {
+          app.router.log = function (msg) { console.log('=>', msg); };
+          app.go(document.location.pathname, false).then(function () {
+            //alert('start?');
+          });
+        });
       })();
     </script>
 
