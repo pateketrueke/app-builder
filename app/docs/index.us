@@ -9,7 +9,7 @@
     <div id="wrapper">
       <nav class="source-tree"><%= tree %></nav>
       <% if (body) { %>
-        <main><%= body %></main>
+        <main class="source-doc"><%= body %></main>
       <% } %>
     </div>
   </body>
