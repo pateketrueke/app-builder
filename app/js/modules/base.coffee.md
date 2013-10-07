@@ -13,16 +13,16 @@ With the `actions` property we can manage all the DOM events within the current 
         actions:
           'redirect.click': 'page_link'
 
-```
-# jade
-a.js-action(data-action='redirect', href=url_for('foo-route')) bar
-
-# html
-<a class="js-action" data-action="redirect" href="/foo">bar</a>
-```
-
 > Note that our link has the `js-action` class and a `data-action` value
-that match our `redirect` action above.
+> that match our `redirect` action above.
+
+> ```
+> # jade
+> # a.js-action(data-action='redirect', href=url_for('foo-route')) bar
+>
+> # html
+> # <a class="js-action" data-action="redirect" href="/foo">bar</a>
+> ```
 
         page_link: (e, el) ->
           e.preventDefault()

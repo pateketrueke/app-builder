@@ -1,52 +1,29 @@
-# Sample.app
-[![Build Status](https://travis-ci.org/pateketrueke/app-builder.png)](https://travis-ci.org/pateketrueke/app-builder)
+# A Lineman JS Template using Thinner
 
-This template uses [Lineman](https://github.com/testdouble/lineman) because YOLO.
+This [Lineman](https://github.com/testdouble/lineman) template is crafted to work with [Thinner](https://github.com/pateketrueke/thinner).
 
-Where I start?
---------------
+It includes the following features:
 
-Do you remember MVC?
+  - Bower integration
+  - Enables Jade templating
+  - Process _literated_ CoffeeScript files
+  - Adds Blanket and jasmine-async within Teste'm
+  - Adds `config.yaml` and `vendor.yaml` for easy setup
 
-Well, this is [MOVE](http://cirw.in/blog/time-to-move-on), the better.
+## Instructions
 
-```coffeescript
-app = new App document.body, '/'
-app.load App.Module
-app.run()
+```
+$ git clone https://github.com/pateketrueke/lineman-template my-app
+$ cd my-app
+$ rm -rf .git
+$ git init
+  ...
+
+$ npm install
+  ...
+
+$ lineman run
+  ...
 ```
 
-Modules
--------
-
-Almost everything will occurs within modules looks as below:
-
-```coffeescript
-class App.Module
-
-  render_template = (page) ->
-    @el.innerHTML += "Page title: #{page.title}"
-
-  initialize_module: (mapper) ->
-    @global_helper = ->
-
-    mapper.draw (match) ->
-      match('/').to 'hello_world'
-
-      hello_world:
-        model: (params) ->
-          new Page params.id
-        setup: (page) ->
-          @send render_template, page
-        events:
-          testEvent: ->
-```
-
-Features
---------
-
-- Based on [app-router-lineman](https://github.com/pateketrueke/app-router-lineman) which is powered by [router.js](https://github.com/tildeio/router.js), the best framework for [route recognizing](https://github.com/tildeio/route-recognizer) and [RSVP](https://github.com/tildeio/rsvp.js).
-
-- Provides support for code coverage with [Blanket](http://alex-seville.github.io/blanket/) and adds [Jade](http://jade-lang.com/) and [Bower](https://github.com/bower/bower) as core dependencies.
-
-- Also tweaks `application.coffee` and `files.coffee` settings for its best approach.
+[![Build Status](https://travis-ci.org/pateketrueke/lineman-template.png)](https://travis-ci.org/pateketrueke/lineman-template)

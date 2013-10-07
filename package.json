@@ -1,10 +1,10 @@
 {
-  "name": "app-builder",
+  "name": "my-app",
   "title": "Sample.app",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
-  "description": "Application skeleton for Lineman",
-  "homepage": "https://github.com/pateketrueke/app-builder",
+  "description": "Custom application skeleton for Lineman",
+  "homepage": "https://github.com/pateketrueke/lineman-template",
   "author": {
     "name": "Alvaro Cabrera",
     "email": "pateketrueke@gmail.com"
@@ -15,9 +15,8 @@
     "grunt-markdown": "~0.3.0",
     "grunt-bower-task": "~0.2.3",
     "grunt-contrib-jade": "~0.7.0",
-    "grunt-contrib-compress": "~0.5.2",
     "grunt-blanket": "0.0.8",
-    "lineman": "~0.12.1"
+    "lineman": "~0.14.5"
   },
   "engines": {
     "node": "~>0.10.5",

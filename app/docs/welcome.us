@@ -1,13 +1,18 @@
-<h2>Package details</h2>
-<ul>
-  <li><%= pkg.name %> v<%= pkg.version %></li>
-  <li><%= pkg.description %></li>
-  <li><%= pkg.homepage %></li>
-</ul>
+<blockquote>
+  <h1>Package details</h1>
+  <ul>
+    <li><%= pkg.name %> v<%= pkg.version %></li>
+    <li><%= pkg.description %></li>
+    <li><%= pkg.homepage %></li>
+  </ul>
+</blockquote>
 
 <h3>Install this</h3>
-<pre><code>$ git clone https://github.com/pateketrueke/lineman-mohawk-template
-$ cd lineman-mohawk-template
+
+<pre><code>$ git clone git@github.com:pateketrueke/lineman-template my-app
+  ...
+
+$ cd my-app
 $ rm -rf .git
 $ git init
   ...

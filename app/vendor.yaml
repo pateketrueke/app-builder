@@ -1,9 +1,9 @@
 js:
   - jade/runtime.js
-#  - mohawk/dist/Mohawk.js
-  - mohawk/dist/bundle/jquery.js
-  - mohawk/dist/bundle/lodash.compat.js
-  - mohawk/dist/bundle/Ractive-legacy.js
-  - mohawk/dist/bundle/rsvp-latest.js
-  - mohawk/dist/bundle/route-recognizer.js
-  - mohawk/dist/bundle/router.js
+  - thinner/dist/bundle/jquery.js
+  - thinner/dist/bundle/lodash.compat.js
+  - thinner/dist/bundle/Ractive-legacy.js
+  - thinner/dist/bundle/rsvp-latest.js
+  - thinner/dist/bundle/route-recognizer.js
+  - thinner/dist/bundle/router.js
+  - thinner/dist/Thinner.js

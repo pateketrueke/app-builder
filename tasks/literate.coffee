@@ -71,11 +71,13 @@ module.exports = (grunt) ->
 
 
     layout = grunt.file.read files.coffee.docs.idx
+    welcome = grunt.file.read files.coffee.docs.main
+
     grunt.file.write index, _.template layout,
       title: pkg.title
       style: "./style.css"
       tree: list(tree, "./", "index.html")
-      body: null
+      body: _.template(welcome, { pkg })
 
     grunt.log.writeln 'File "' + index + '" created.'
 
@@ -89,7 +91,7 @@ module.exports = (grunt) ->
       dots = "./#{dots.join '../'}"
 
       grunt.file.write src, _.template layout,
-        title: "#{pkg.title} ##{doc.title}"
+        title: "#{pkg.title} | #{doc.title}"
         style: "#{dots}style.css"
         tree: list(tree, dots, doc.path)
         body: grunt.file.read src

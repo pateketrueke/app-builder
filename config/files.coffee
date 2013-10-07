@@ -1,19 +1,5 @@
-# Exports an object that defines
-#  all of the paths & globs that the project
-#  is concerned with.
-#
-# The "configure" task will require this file and
-#  then re-initialize the grunt config such that
-#  directives like <config:files.js.app> will work
-#  regardless of the point you're at in the build
-#  lifecycle.
-#
-# You can find the parent object in: node_modules/lineman/config/files.coffee
-#
 config = require(process.env["LINEMAN_MAIN"]).config
 config = config.extend "files",
-
-  #Override file patterns here
 
   app:
     dev: {}
@@ -34,13 +20,18 @@ config = config.extend "files",
 
   coffee:
     app: ["app/js/**/*.litcoffee", "app/js/**/*.coffee.md", "app/js/**/*.coffee"]
-    spec: ["spec/**/*.litcoffee", "spec/js/**/*.coffee.md", "spec/**/*.coffee"]
+    spec: ["spec/**/*.litcoffee", "spec/**/*.coffee.md", "spec/**/*.coffee"]
     docs:
       idx: "app/docs/index.us"
       tpl: "app/docs/layout.us"
       css: "app/docs/styles.css"
       main: "app/docs/welcome.us"
-      src: ["app/**/*.md", "app/**/*.litcoffee", "spec/**/*.litcoffee", "spec/**/*.coffee.md"]
+      src: [
+        "app/**/*.md"
+        "app/**/*.litcoffee"
+        "spec/**/*.litcoffee"
+        "spec/**/*.coffee.md"
+      ]
       dest: "htmldocs/"
 
   css:
