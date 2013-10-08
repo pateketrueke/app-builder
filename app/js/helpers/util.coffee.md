@@ -1,6 +1,6 @@
 # Global scope and utilities
 
-    Thinner ->
+    thinner ->
       # backup for later
       default_title = document.title
 
@@ -23,7 +23,7 @@
       @helpers.url_for = @url
 
 
-      @extend
+      @exports
         layout: ->
           $('#wrapper').html @render(arguments...)
 

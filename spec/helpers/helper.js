@@ -35,6 +35,6 @@ root.alert = (function () {
 
 $('<div id="wrapper" />').hide().appendTo(document.body);
 
-Thinner.setup({el: '#wrapper'});
+thinner.setup({el: '#wrapper'});
 
-var app = Thinner.loader();
+var app = thinner.loader();

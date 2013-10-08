@@ -2,7 +2,7 @@
 
 The application core and routing.
 
-    Thinner (App) ->
+    thinner (App) ->
       class App.myApp
         constructor: (@app) ->
 

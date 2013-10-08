@@ -2,7 +2,7 @@
 
 We're using [Ractive](https://github.com/Rich-Harris/Ractive) because it rocks a lot.
 
-    Thinner (App) ->
+    thinner (App) ->
 
 Automatically instantiate our _ractive_ view.
 
@@ -44,6 +44,7 @@ Set the users list and updates the view.
 Event handling.
 
         setup: ->
+          @view._bound = [] # Ractive v0.3.7 bug
           @view.on
             set_user: (e) =>
               @set_user e.node.value

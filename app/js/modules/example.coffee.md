@@ -2,7 +2,7 @@
 
 Main application workflow with [Thinner](https://github.com/pateketrueke/thinner).
 
-    Thinner (App) ->
+    thinner (App) ->
       { title, subtitle, layout, partial } = @imports
 
 ## showError Class

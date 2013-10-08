@@ -21,7 +21,7 @@
 
     <script type="text/javascript">
       !(function () {
-        Thinner.loader({ el: '#wrapper' }).run(function (app) {
+        thinner.loader({ el: '#wrapper' }).run(function (app) {
           app.router.log = function (msg) { console.log('=>', msg); };
           app.go(document.location.pathname, false).then(function () {
             //alert('start?');

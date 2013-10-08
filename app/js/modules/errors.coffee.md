@@ -2,7 +2,7 @@
 
 Here we'll define some classes for error handling.
 
-    Thinner (App) ->
+    thinner (App) ->
 
 ## ErrorBase Class
 
