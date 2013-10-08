@@ -1,8 +1,7 @@
 js:
   - jade/runtime.js
+  - ractive/build/Ractive-legacy.js
   - thinner/dist/bundle/jquery.js
-  - thinner/dist/bundle/lodash.compat.js
-  - thinner/dist/bundle/Ractive-legacy.js
   - thinner/dist/bundle/rsvp-latest.js
   - thinner/dist/bundle/route-recognizer.js
   - thinner/dist/bundle/router.js
