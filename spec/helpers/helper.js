@@ -2,7 +2,8 @@ var root = this || window;
 
 root.context = root.describe;
 root.xcontext = root.xdescribe;
-root._$blanket = root._$jscoverage;
+
+root._$blanket = root._$jscoverage = {};
 
 if (! document.body) {
   document.body = document.createElement('body');
