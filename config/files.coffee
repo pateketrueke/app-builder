@@ -9,14 +9,13 @@ config = config.extend "files",
     dest: "vendor/components"
 
   blanket:
-    dest: "coverage/"
-    src: "generated/js/app/"
+    dest: "generated/coverage"
+    src: "generated/js/app"
 
   template:
     jade:
       src: ["app/templates/**/*.jade", "app/templates/**/*.jd"]
       dest: "generated/template/jade.js"
-    concatenatedViews: "generated/js/views.js"
 
   coffee:
     app: ["app/js/**/*.litcoffee", "app/js/**/*.coffee.md", "app/js/**/*.coffee"]
@@ -54,6 +53,7 @@ config = config.extend "files",
     concatenatedCI: "generated/js/ci.js"
     concatenatedApp: "generated/js/app/main.js"
     concatenatedSpec: "generated/js/spec/main.js"
+    concatenatedViews: "generated/js/views.js"
     concatenatedVendor: "generated/js/vendor.js"
 
 

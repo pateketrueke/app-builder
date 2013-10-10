@@ -1,3 +1,5 @@
+concat = { banner: "~(function (app) {\n", footer: "\n})(thinner.loader());\n" }
+
 config = require(process.env["LINEMAN_MAIN"]).config
 config = config.extend "application",
 
@@ -18,7 +20,7 @@ config = config.extend "application",
     common: ["handlebars", "jst"]
 
   appendTasks:
-    dist: []
+    common: ["blanket"]
 
   pages:
     dev:
@@ -41,16 +43,9 @@ config = config.extend "application",
     js:
       src: [
         "dist"
-        "<%= files.bower.dest %>"
-        "<%= files.blanket.dest %>"
-        "<%= files.coffee.docs.dest %>"
-        "<%= files.coffee.generated %>"
-        "<%= files.coffee.generatedSpec %>"
-        "<%= files.template.concatenatedViews %>"
-        "<%= files.js.concatenatedCI %>"
-        "<%= files.js.concatenatedApp %>"
-        "<%= files.js.concatenatedSpec %>"
-        "<%= files.js.concatenatedVendor %>"
+        "htmldocs"
+        "generated"
+        "vendor/components"
       ]
 
   markdown:
@@ -82,11 +77,11 @@ config = config.extend "application",
   watch:
     coffee:
       files: ["<%= files.coffee.spec %>", "<%= files.coffee.app %>"]
-      tasks: ["coffee", "concat:app"]
+      tasks: ["coffee", "concat:app", "blanket"]
 
     jade:
       files: "<%= files.template.jade.src %>"
-      tasks: ["jade", "concat:app"]
+      tasks: ["jade", "concat:views"]
 
     lint:
       files: ["<%= files.js.app.files %>"]
@@ -112,12 +107,29 @@ config = config.extend "application",
       dest: "<%= files.js.concatenatedCI %>"
 
     app:
-      options:
-        process: (src, filepath) ->
-          "!(function (/* #{filepath} */) {\n#{src}\n}).call(this)"
+      options: concat
       files:
-        "<%= files.js.concatenatedApp %>": ["<%= files.js.app.files %>", "<%= files.coffee.generated %>"]
-        "<%= files.template.concatenatedViews %>": ["<%= files.template.generated %>"]
+        "<%= files.js.concatenatedApp %>": [
+          "<%= files.js.app.files %>"
+          "<%= files.coffee.generated %>"
+        ]
+
+    spec:
+      options: concat
+      dest: "<%= files.js.concatenatedSpec %>"
+      src: [
+          "<%= files.coffee.generatedSpecHelpers %>"
+          "<%= files.coffee.specHelpers %>"
+          "<%= files.js.specHelpers %>"
+          "<%= files.js.app.files %>"
+          "<%= files.coffee.generated %>"
+          "<%= files.coffee.generatedSpec %>"
+          "<%= files.js.spec %>"
+        ]
+
+    views:
+      dest: "<%= files.js.concatenatedViews %>"
+      src: "<%= files.template.generated %>"
 
     vendor:
       options:
@@ -146,7 +158,6 @@ config = config.extend "application",
     js:
       dest: "<%= files.js.minifiedDist %>"
       src: [
-        "<%= files.template.concatenatedViews %>"
         "<%= files.js.concatenatedVendor %>"
         "<%= files.js.concatenatedApp %>"
       ]
