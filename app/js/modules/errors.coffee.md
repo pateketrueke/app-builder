@@ -13,8 +13,6 @@ The basis for all errors.
         # holds the origin
         rorigin = new RegExp(location.origin, 'g')
 
-        constructor: (@app) ->
-
 Removes the current `location.origin` from the error stack string.
 
         reduce: (str) ->
@@ -28,7 +26,7 @@ This class is used when a exception occurs, isn't perfect but is very useful.
 
       class App.errorHandler extends ErrorBase
         exception: (e) ->
-          @app.router.reset()
+          app.router.reset()
 
 Shows sort of formatted debug, just a plain message but it could be better.
 
@@ -45,7 +43,7 @@ This class is used for unhandled or unknown routes.
 
       class App.notFound extends ErrorBase
         exception: (e) ->
-          @app.router.reset()
+          app.router.reset()
 
 Certainly you can do it better.
 

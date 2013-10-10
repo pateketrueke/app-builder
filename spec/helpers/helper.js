@@ -29,12 +29,3 @@ root.alert = (function () {
     return str;
   };
 }());
-
-
-// setup
-
-$('<div id="wrapper" />').hide().appendTo(document.body);
-
-thinner.setup({el: '#wrapper'});
-
-var app = thinner.loader();

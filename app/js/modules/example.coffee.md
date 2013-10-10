@@ -3,7 +3,6 @@
 Main application workflow with [Thinner](https://github.com/pateketrueke/thinner).
 
     thinner (App) ->
-      { title, subtitle, layout, partial } = @imports
 
 ## showError Class
 
@@ -18,7 +17,6 @@ Just a dummy for testing.
 A button will `alert()` some message depending on user selection made through the link.
 
       class App.showHome
-        constructor: (@app) ->
 
 User interaction bindings.
 
@@ -29,7 +27,7 @@ User interaction bindings.
 When the user clicks the button.
 
         show_name: ->
-          if user = @app.get('user')
+          if user = app.get('user')
             alert user.name
           else
             alert 'Pick someone!'
@@ -38,14 +36,13 @@ Before the handler has fully loaded.
 
         enter: ->
           title 'Hello World'
-          layout 'welcome', user: @app.get 'user'
+          layout 'welcome', user: app.get 'user'
 
 ## showUser Class
 
 Through this view the user should choose a sole user from the list.
 
       class App.showUser
-        constructor: (@app) ->
 
 Before setup any view we must load their layout.
 
@@ -64,8 +61,8 @@ Renderize the user list.
 Updates the current user value.
 
           @someWidget().view.on 'set_user', (e) =>
-            @app.set 'user', @someWidget().current_user()
-            @app.go 'show_user', id: e.node.value
+            app.set 'user', @someWidget().current_user()
+            app.go 'show_user', id: e.node.value
 
 > When the handler exit destroys all registered _ractive_ instances.
 

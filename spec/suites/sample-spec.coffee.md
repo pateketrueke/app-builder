@@ -1,4 +1,3 @@
-
     app.run ->
 
      describe 'Sample', ->
@@ -17,8 +16,6 @@
             expect(ucwords 'a basic sample-string __with camelCase or.dot.case').toEqual 'A Basic sample-string __with camelCase or.dot.case'
 
           it 'can I change the title?', ->
-            { title, subtitle } = app.imports
-
             title 'Foo'
             subtitle 'Bar'
 

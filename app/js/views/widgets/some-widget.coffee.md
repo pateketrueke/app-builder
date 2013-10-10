@@ -14,8 +14,8 @@ Automatically instantiate our _ractive_ view.
         users = []
         current_user = -1
 
-        constructor: (@app) ->
-          @view.template = @app.render 'ractive'
+        constructor: ->
+          @view.template = app.render 'ractive'
 
 The current user data.
 
