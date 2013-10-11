@@ -6,9 +6,9 @@ module.exports = (grunt) ->
 
     files = require "#{process.cwd()}/config/files"
     pkg = grunt.file.readJSON "package.json"
-    path = files.coffee.docs.dest
-    index = "#{path}index.html"
-    style = "#{path}style.css"
+    path = files.literate.docDest
+    index = "#{path}/index.html"
+    style = "#{path}/style.css"
 
 
     list = (set, path, current) ->
@@ -38,7 +38,7 @@ module.exports = (grunt) ->
 
     linkify = (dir, node, current) ->
       href = "#{node.basePath}/#{node.baseName}"
-      klass = if href.replace(/^\/+/g, "") is current then ' class="here"' else ''
+      klass = if href is current then ' class="here"' else ''
 
       """
       <a href="#{dir.replace /\/+$/g, ''}/#{node.baseName}"#{klass}>#{node.docTitle}</a>
@@ -70,8 +70,8 @@ module.exports = (grunt) ->
         map[srcFile] = { title: docTitle, path: "#{basePath}/#{baseName}" }
 
 
-    layout = grunt.file.read files.coffee.docs.idx
-    welcome = grunt.file.read files.coffee.docs.main
+    layout = grunt.file.read files.literate.docIndex
+    welcome = grunt.file.read files.literate.docMain
 
     grunt.file.write index, _.template layout,
       title: pkg.title
@@ -81,7 +81,7 @@ module.exports = (grunt) ->
 
     grunt.log.writeln 'File "' + index + '" created.'
 
-    grunt.file.copy files.coffee.docs.css, style
+    grunt.file.copy files.literate.docStyles, style
     grunt.log.writeln 'File "' + style + '" copied.'
 
 

@@ -1,5 +1,3 @@
-concat = { banner: "~(function (app) {\n", footer: "\n})(thinner.loader());\n" }
-
 config = require(process.env["LINEMAN_MAIN"]).config
 config = config.extend "application",
 
@@ -10,27 +8,24 @@ config = config.extend "application",
     "grunt-markdown"
     "grunt-bower-task"
     "grunt-contrib-jade"
+    "grunt-closure-compiler"
     "grunt-blanket"
   ]
 
   prependTasks:
-    common: ["bower", "jade"]
+    common: ["bower"]
 
   removeTasks:
-    common: ["handlebars", "jst"]
+    common: ["handlebars", "coffee", "concat", "jshint", "jst"]
+    dist: ["uglify"]
 
   appendTasks:
-    common: ["blanket"]
+    common: ["jade", "coffee:*", "blanket", "concat:*"]
+    dist: ["closure-compiler"]
 
   pages:
-    dev:
-      context:
-        js: "<%= files.app.dev.js %>"
-        css: "<%= files.app.dev.css %>"
-    dist:
-      context:
-        js: ["<%= files.app.dist.js %>"]
-        css: ["<%= files.app.dist.css %>"]
+    dev: { context: "<%= files.app.dev %>" }
+    dist: { context: "<%= files.app.dist %>" }
 
   bower:
     install:
@@ -41,103 +36,71 @@ config = config.extend "application",
 
   clean:
     js:
+      src: ["dist", "htmldocs", "generated", "vendor/components"]
+
+  coffee:
+    options:
+      bare: on
+    compile:
+      expand: on
+      ext: ".js"
+      cwd: "<%= files.app.jsPath %>"
+      src: "<%= files.blanket.files %>"
+      dest: "<%= files.blanket.src %>"
+    spec:
       src: [
-        "dist"
-        "htmldocs"
-        "generated"
-        "vendor/components"
+        "<%= files.coffee.generatedSpecHelpers %>"
+        "<%= files.coffee.specHelpers %>"
+        "<%= files.coffee.spec %>"
       ]
+      dest: "<%= files.spec.app.dest %>"
 
   markdown:
     docs:
       files: [
-        { expand: on, src: "<%= files.coffee.docs.src %>", dest: "<%= files.coffee.docs.dest %>", ext: ".html" }
+        { expand: on, src: "<%= files.literate.docSrc %>", dest: "<%= files.literate.docDest %>", ext: ".html" }
       ]
       options:
-        template: "<%= files.coffee.docs.tpl %>"
+        template: "<%= files.literate.docTemplate %>"
         markdownOptions:
           gfm: on
           highlight: (code, lang) ->
             hljs = require "highlight.js"
             hljs.highlight(lang or "coffeescript", code).value
 
-  coffee:
-    options:
-      bare: on
-
-  jade:
+  blanket:
+    options: {}
     compile:
-      options:
-        client: on
-        compileDebug: off
-
-      files:
-        "<%= files.template.jade.dest %>": "<%= files.template.jade.src %>"
-
-  watch:
-    coffee:
-      files: ["<%= files.coffee.spec %>", "<%= files.coffee.app %>"]
-      tasks: ["coffee", "concat:app", "blanket"]
-
-    jade:
-      files: "<%= files.template.jade.src %>"
-      tasks: ["jade", "concat:views"]
-
-    lint:
-      files: ["<%= files.js.app.files %>"]
-
-    css:
-      files: ["<%= files.css.vendor %>", "<%= files.css.files %>", "<%= files.css.app %>"]
-      tasks: ["concat:css"]
-
-    js:
-      files: ["<%= files.js.files %>", "<%= files.js.app.files %>"]
-      tasks: ["concat:vendor", "concat:app"]
-
-    ci:
-      files: ["<%= files.js.ci.files %>"]
-      tasks: ["concat:js"]
-
-  jshint:
-    files: ["<%= files.js.app.files %>"]
+      src: "<%= files.blanket.src %>"
+      dest: "<%= files.blanket.dest %>"
 
   concat:
     js:
-      src: "<%= files.js.ci.files %>"
-      dest: "<%= files.js.concatenatedCI %>"
+      options: { banner: "" }
+      src: "<%= files.spec.ci.src %>"
+      dest: "<%= files.spec.ci.dest %>"
 
     app:
-      options: concat
+      options:
+        banner: "~(function (app) {\n"
+        footer: "\n})(thinner.loader());\n"
       files:
-        "<%= files.js.concatenatedApp %>": [
-          "<%= files.js.app.files %>"
-          "<%= files.coffee.generated %>"
+        "<%= files.js.concatenated %>": "<%= files.blanket.src %>/**/*.js"
+        "<%= files.js.concatenatedSpec %>": [
+          "<%= files.spec.app.src %>"
+          "<%= files.spec.app.dest %>"
         ]
 
     spec:
-      options: concat
-      dest: "<%= files.js.concatenatedSpec %>"
-      src: [
-          "<%= files.coffee.generatedSpecHelpers %>"
-          "<%= files.coffee.specHelpers %>"
-          "<%= files.js.specHelpers %>"
-          "<%= files.js.app.files %>"
-          "<%= files.coffee.generated %>"
-          "<%= files.coffee.generatedSpec %>"
-          "<%= files.js.spec %>"
-        ]
-
-    views:
-      dest: "<%= files.js.concatenatedViews %>"
-      src: "<%= files.template.generated %>"
+      src: "<%= files.spec.helpers.src %>"
+      dest: "<%= files.spec.helpers.dest %>"
 
     vendor:
       options:
-        separator: ';'
         process: (src, filepath) ->
           src.replace /["']use strict['"]\s*;?/g, ''
-      files:
-        "<%= files.js.concatenatedVendor %>": ["<%= files.js.files %>"]
+      src: "<%= files.js.files %>"
+      dest: "<%= files.js.concatenatedVendor %>"
 
     css:
       src: [
@@ -148,24 +111,51 @@ config = config.extend "application",
       ]
       dest: "<%= files.css.concatenated %>"
 
-  blanket:
+  jade:
     compile:
-      options: {}
-      files:
-        "<%= files.blanket.dest %>": "<%= files.blanket.src %>"
-
-  uglify:
-    js:
-      dest: "<%= files.js.minifiedDist %>"
-      src: [
-        "<%= files.js.concatenatedVendor %>"
-        "<%= files.js.concatenatedApp %>"
-      ]
+      options:
+        client: on
+        compileDebug: off
+      src: "<%= files.app.jsViews.src %>"
+      dest: "<%= files.app.jsViews.dest %>"
 
   cssmin:
     compress:
-        src: "<%= files.css.concatenated %>"
-        dest: "<%= files.css.minifiedDist %>"
+      src: "<%= files.css.concatenated %>"
+      dest: "<%= files.css.minified %>"
+
+  "closure-compiler":
+    app:
+      closurePath: '/usr/share/closure-compiler'
+      jsOutputFile: "<%= files.js.minified %>"
+      js: [
+        "<%= files.app.jsViews.dest %>"
+        "<%= files.js.concatenatedVendor %>"
+        "<%= files.js.concatenated %>"
+      ]
+      maxBuffer: 9001
+      noreport: on
+      options:
+        compilation_level: 'SIMPLE_OPTIMIZATIONS'
+
+  watch:
+    coffeeSpecs:
+      tasks: ["coffee:spec", "concat:spec", "concat:app"]
+
+    coffee:
+      tasks: ["coffee:compile", "blanket", "concat:spec", "concat:app"]
+
+    jade:
+      files: "<%= files.app.jsViews.src %>"
+      tasks: ["jade", "concat:views"]
+
+    css:
+      files: ["<%= files.css.vendor %>", "<%= files.css.files %>", "<%= files.css.app %>"]
+      tasks: ["concat:css"]
+
+    js:
+      files: ["<%= files.js.files %>"]
+      tasks: ["concat:vendor"]
 
 
 module.exports = config

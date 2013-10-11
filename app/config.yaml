@@ -2,7 +2,7 @@ dev:
   js:
     - /js/views.js
     - /js/vendor.js
-    - /js/app/main.js
+    - /js/app.js
   css: /css/app.css
 
 dist:

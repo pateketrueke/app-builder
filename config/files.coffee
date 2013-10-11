@@ -5,55 +5,60 @@ config = config.extend "files",
     dev: {}
     dist: {}
 
+    jsPath: "app/js"
+
+    jsViews:
+      src: "app/templates/**/*.jade"
+      dest: "generated/js/views.js"
+
+  spec:
+    ci:
+      src: [
+        "vendor/components/jasmine.async/lib/jasmine.async.js"
+        "vendor/components/blanket/dist/jasmine/blanket_jasmine.js"
+      ]
+      dest: "generated/js/spec-ci.js"
+
+    app:
+      src: "generated/blanket/**/*.js"
+      dest: "generated/js/spec-app.js"
+
+    helpers:
+      src: "spec/helpers/**/*.js"
+      dest: "generated/js/spec-helpers.js"
+
+  coffee:
+    app: "app/js/**/*.{coffee,coffee.md,litcoffee}"
+    spec: "spec/**/*.{coffee,coffee.md,litcoffee}"
+
   bower:
     dest: "vendor/components"
 
   blanket:
-    dest: "generated/coverage"
-    src: "generated/js/app"
+    src: "generated/coffee"
+    dest: "generated/blanket"
+    files: "**/*.{coffee,coffee.md,litcoffee}"
 
-  template:
-    jade:
-      src: ["app/templates/**/*.jade", "app/templates/**/*.jd"]
-      dest: "generated/template/jade.js"
-
-  coffee:
-    app: ["app/js/**/*.litcoffee", "app/js/**/*.coffee.md", "app/js/**/*.coffee"]
-    spec: ["spec/**/*.litcoffee", "spec/**/*.coffee.md", "spec/**/*.coffee"]
-    docs:
-      idx: "app/docs/index.us"
-      tpl: "app/docs/layout.us"
-      css: "app/docs/styles.css"
-      main: "app/docs/welcome.us"
-      src: [
-        "app/**/*.md"
-        "app/**/*.litcoffee"
-        "spec/**/*.litcoffee"
-        "spec/**/*.coffee.md"
-      ]
-      dest: "htmldocs/"
+  literate:
+    docIndex: "app/docs/index.us"
+    docTemplate: "app/docs/layout.us"
+    docStyles: "app/docs/styles.css"
+    docMain: "app/docs/welcome.us"
+    docDest: "htmldocs"
+    docSrc: [
+      "app/js/**/*.{md,litcoffee}"
+      "spec/**/*.{md,litcoffee}"
+    ]
 
   css:
     files: ["vendor/css/**/*.css"]
-    minifiedDist: "dist/css/<%= pkg.name %>.css"
+    minified: "dist/css/<%= pkg.name %>.css"
+    concatenated: "generated/css/app.css"
 
   js:
     files: ["vendor/js/**/*.js"]
-
-    app:
-      files: ["app/js/**/*.js"]
-
-    ci:
-      files: [
-        "vendor/components/jasmine.async/lib/jasmine.async.js"
-        "vendor/components/blanket/dist/jasmine/blanket_jasmine.js"
-      ]
-
-    minifiedDist: "dist/js/<%= pkg.name %>.js"
-    concatenatedCI: "generated/js/ci.js"
-    concatenatedApp: "generated/js/app/main.js"
-    concatenatedSpec: "generated/js/spec/main.js"
-    concatenatedViews: "generated/js/views.js"
+    minified: "dist/js/<%= pkg.name %>.js"
+    concatenatedSpec: "generated/js/spec.js"
     concatenatedVendor: "generated/js/vendor.js"
 
 

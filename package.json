@@ -15,6 +15,7 @@
     "grunt-markdown": "~0.3.0",
     "grunt-bower-task": "~0.2.3",
     "grunt-contrib-jade": "~0.7.0",
+    "grunt-closure-compiler": "0.0.21",
     "grunt-blanket": "0.0.8",
     "lineman": "~0.14.5"
   },
