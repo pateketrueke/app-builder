@@ -5,6 +5,10 @@ config = config.extend "files",
     dev: {}
     dist: {}
 
+    public:
+      src: ["**/*", "**/.ht*"]
+      dest: "dist"
+
     jsPath: "app/js"
 
     jsViews:

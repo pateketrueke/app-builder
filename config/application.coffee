@@ -1,5 +1,5 @@
 config = require(process.env["LINEMAN_MAIN"]).config
-config = config.extend "application",
+common =
 
   server:
     pushState: on
@@ -7,8 +7,10 @@ config = config.extend "application",
   loadNpmTasks: [
     "grunt-markdown"
     "grunt-bower-task"
+    "grunt-contrib-copy"
     "grunt-contrib-jade"
-    "grunt-closure-compiler"
+    "grunt-contrib-compress"
+    "grunt-closurecompiler"
     "grunt-blanket"
   ]
 
@@ -20,12 +22,27 @@ config = config.extend "application",
     dist: ["uglify"]
 
   appendTasks:
-    common: ["jade", "coffee:*", "blanket", "concat:*"]
-    dist: ["closure-compiler"]
+    common: ["jade", "coffee:*", "blanket", "concat:*", "copy:public"]
+    dist: ["closurecompiler"]
+
+  locals: {}
 
   pages:
     dev: { context: "<%= files.app.dev %>" }
     dist: { context: "<%= files.app.dist %>" }
+
+  copy:
+    public:
+      files: [
+        {
+          expand: on
+          flatten: off
+          cwd: "app/public"
+          src: "<%= files.app.public.src %>"
+          dest: "<%= process.env['ENV'] && (/^(test(ing)?|debug|dev)$/.test(process.env['ENV'])) ? 'generated' : 'dist' %>"
+          filter: "isFile"
+        }
+      ]
 
   bower:
     install:
@@ -69,7 +86,8 @@ config = config.extend "application",
             hljs.highlight(lang or "coffeescript", code).value
 
   blanket:
-    options: {}
+    options:
+      branchTracking: on
     compile:
       src: "<%= files.blanket.src %>"
       dest: "<%= files.blanket.dest %>"
@@ -82,8 +100,8 @@ config = config.extend "application",
 
     app:
       options:
-        banner: "~(function (app) {\n"
-        footer: "\n})(thinner.loader());\n"
+        banner: ";(function (app) {\nvar ENV = <%= JSON.stringify(locals || {}) %>;\n"
+        footer: "\n}).call(this, thinner.loader());\n"
       files:
         "<%= files.js.concatenated %>": "<%= files.blanket.src %>/**/*.js"
         "<%= files.js.concatenatedSpec %>": [
@@ -124,18 +142,18 @@ config = config.extend "application",
       src: "<%= files.css.concatenated %>"
       dest: "<%= files.css.minified %>"
 
-  "closure-compiler":
+  closurecompiler:
     app:
-      closurePath: '/usr/share/closure-compiler'
-      jsOutputFile: "<%= files.js.minified %>"
-      js: [
-        "<%= files.app.jsViews.dest %>"
-        "<%= files.js.concatenatedVendor %>"
-        "<%= files.js.concatenated %>"
-      ]
-      maxBuffer: 9001
-      noreport: on
+      files:
+        "<%= files.js.minified %>": [
+          "<%= files.app.jsViews.dest %>"
+          "<%= files.js.concatenatedVendor %>"
+          "<%= files.js.concatenated %>"
+        ]
       options:
+        language_in: 'ECMASCRIPT5'
+        warning_level: 'QUIET'
+        summary_detail_level: 0
         compilation_level: 'SIMPLE_OPTIMIZATIONS'
 
   watch:
@@ -158,4 +176,28 @@ config = config.extend "application",
       tasks: ["concat:vendor"]
 
 
-module.exports = config
+# overrides
+if process.argv.indexOf('--') > 0
+  grunt = require "grunt"
+  _ = grunt.util._
+
+  merge = (dest, src) ->
+    for key, val of src
+      if _.isArray(dest[key])
+        dest[key] = dest[key].concat val
+      else if _.isObject(dest[key])
+        merge(dest[key], val)
+      else
+        dest[key] = val
+
+  targets = process.argv.slice(process.argv.indexOf('--') + 1)
+
+  for target in targets
+    try
+      targetConfig = require "#{__dirname}/environment/#{target}.coffee"
+    catch e
+      targetConfig = grunt.file.readYAML "#{__dirname}/environment/#{target}.yaml"
+
+    merge common, targetConfig
+
+module.exports = config.extend "application", common

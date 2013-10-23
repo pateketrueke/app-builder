@@ -22,10 +22,12 @@
     <script type="text/javascript">
       !(function () {
         thinner.loader({ el: '#wrapper' }).run(function (app) {
-          app.router.log = function (msg) { console.log('=>', msg); };
           app.go(document.location.pathname, false).then(function () {
             //alert('start?');
           });
+          <% if (process.env['ENV'] && (/^(test(ing)?|debug|dev)$/.test(process.env['ENV']))) { %>
+          app.router.log = function (msg) { console.log('=>', msg); };
+          <% } %>
         });
       })();
     </script>
