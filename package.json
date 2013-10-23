@@ -1,7 +1,7 @@
 {
   "name": "my-app",
   "title": "Sample.app",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "private": true,
   "description": "Custom application skeleton for Lineman",
   "homepage": "https://github.com/pateketrueke/lineman-template",
