@@ -9,6 +9,7 @@ It includes the following features:
   - Process _literated_ CoffeeScript files
   - Adds Blanket and jasmine-async within Teste'm
   - Adds `config.yaml` and `vendor.yaml` for easy setup
+  - Enables selective configuration per target with `lineman build -- target`
 
 ## Instructions
 
