@@ -14,15 +14,11 @@ It includes the following features:
 ## Instructions
 
 ```
-$ git clone https://github.com/pateketrueke/lineman-template my-app
+$ npm install -g volo
+$ volo create my-app pateketrueke/lineman-template
+  ...
+
 $ cd my-app
-$ rm -rf .git
-$ git init
-  ...
-
-$ npm install
-  ...
-
 $ lineman run
   ...
 ```
