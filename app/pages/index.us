@@ -25,7 +25,7 @@
           app.go(document.location.pathname, false).then(function () {
             //alert('start?');
           });
-          <% if (process.env['ENV'] && (/^(test(ing)?|debug|dev)$/.test(process.env['ENV']))) { %>
+          <% if (('ENV' in process.env ? process.env['ENV'] : '') !== 'production') { %>
           app.router.log = function (msg) { console.log('=>', msg); };
           <% } %>
         });

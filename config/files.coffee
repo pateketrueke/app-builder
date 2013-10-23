@@ -6,14 +6,17 @@ config = config.extend "files",
     dist: {}
 
     public:
+      cwd: "app/public"
       src: ["**/*", "**/.ht*"]
-      dest: "dist"
+      dest: "<%= ('ENV' in process.env ? process.env['ENV'] : '') !== 'production' ? 'generated' : 'dist' %>"
 
     jsPath: "app/js"
 
     jsViews:
       src: "app/templates/**/*.jade"
       dest: "generated/js/views.js"
+
+    cleanDirs: ["dist", "htmldocs", "generated", "vendor/components"]
 
   spec:
     ci:

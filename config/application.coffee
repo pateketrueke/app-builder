@@ -34,14 +34,7 @@ common =
   copy:
     public:
       files: [
-        {
-          expand: on
-          flatten: off
-          cwd: "app/public"
-          src: "<%= files.app.public.src %>"
-          dest: "<%= process.env['ENV'] && (/^(test(ing)?|debug|dev)$/.test(process.env['ENV'])) ? 'generated' : 'dist' %>"
-          filter: "isFile"
-        }
+        { expand: on, flatten: off, cwd: "<%= files.app.public.cwd %>", src: "<%= files.app.public.src %>", dest: "<%= files.app.public.dest %>", filter: "isFile" }
       ]
 
   bower:
@@ -53,7 +46,7 @@ common =
 
   clean:
     js:
-      src: ["dist", "htmldocs", "generated", "vendor/components"]
+      src: ["<%= files.app.cleanDirs %>"]
 
   coffee:
     options:
