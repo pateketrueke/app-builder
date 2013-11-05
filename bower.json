@@ -2,7 +2,7 @@
   "name": "my-app",
   "dependencies": {
     "jade": "~0.32.0",
-    "thinner": "~0.7.0",
+    "thinner": "~0.7.1",
     "ractive": "~0.3.7"
   },
   "devDependencies": {
