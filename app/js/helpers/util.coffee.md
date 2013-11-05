@@ -29,14 +29,12 @@
       document.title = out.join sep
 
 
-    thinner ->
-      @helpers.ucfirst = (str) ->
-        if isWord(str) then ucChar(str) else str
+    @helpers.ucfirst = (str) ->
+      if isWord(str) then ucChar(str) else str
 
+    @helpers.ucwords = (str) ->
+      str.replace /(^|\s)(\S+)/g, (zero, one, two) ->
+        one + if isWord(two) then ucChar(two) else two
 
-      @helpers.ucwords = (str) ->
-        str.replace /(^|\s)(\S+)/g, (zero, one, two) ->
-          one + if isWord(two) then ucChar(two) else two
-
-      @helpers.url_for = ->
-        app.url arguments...
+    @helpers.url_for = ->
+      app.url arguments...

@@ -93,8 +93,13 @@ common =
 
     app:
       options:
-        banner: ";(function (app) {\nvar ENV = <%= JSON.stringify(locals || {}) %>;\n"
-        footer: "\n}).call(this, thinner.loader());\n"
+        banner: """
+                ;thinner.bind(function (app) {
+                var ENV = <%= JSON.stringify(locals || {}) %>;\n
+                """
+        footer: """
+                });
+                """
       files:
         "<%= files.js.concatenated %>": "<%= files.blanket.src %>/**/*.js"
         "<%= files.js.concatenatedSpec %>": [
